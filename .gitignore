@@ -1,0 +1,15 @@
+# Python Virtual Environment & Cache
+.venv/
+__pycache__/
+*.pyc
+
+# OS & Temp Files
+.DS_Store
+*.log
+
+# Development Preview Screenshots (Not needed in deployment)
+desktop_*.png
+mobile_*.png
+phone_*.png
+final_widescreen.png
+test_out*.png

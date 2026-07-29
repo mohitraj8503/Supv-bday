@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Happy Birthday Jiya | Special Celebration</title>
+<meta name="description" content="A magical birthday celebration webpage created specially for Jiya!">
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+
+<!-- Canvas Confetti Library -->
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+<style>
+  :root {
+    --primary-blue: #5b6df1;
+    --primary-blue-dark: #4455db;
+    --pink-accent: #ff5fb1;
+    --pink-light: #ffb8e1;
+    --purple-soft: #a8b2f8;
+    --text-dark: #20274d;
+    --text-muted: #5e699e;
+    --glass-bg: rgba(255, 255, 255, 0.78);
+    --glass-border: rgba(255, 255, 255, 0.92);
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html, body {
+    width: 100vw;
+    height: 100vh;
+    min-height: 100vh;
+    font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: #eef2fb;
+    color: var(--text-dark);
+    overflow-x: hidden;
+  }
+
+  /* Full-Bleed 16:9 Widescreen Desktop View */
+  .site-wrapper {
+    width: 100vw;
+    height: 100vh;
+    min-height: 100vh;
+    position: relative;
+    background: linear-gradient(135deg, #f6f8fe 0%, #edf1fd 45%, #fef3f9 100%);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  /* Top Garland Banner Asset */
+  .garland-banner {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 320px;
+    max-width: 80vw;
+    height: auto;
+    z-index: 15;
+    pointer-events: none;
+    filter: drop-shadow(0 4px 10px rgba(91, 109, 241, 0.12));
+    animation: swayBanner 6s ease-in-out infinite alternate;
+  }
+
+  @keyframes swayBanner {
+    0% { transform: translateX(-50%) rotate(-1.2deg); }
+    100% { transform: translateX(-50%) rotate(1.2deg); }
+  }
+
+  /* Balloon Border Overlay Asset */
+  .balloon-border-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    max-height: 65px;
+    object-fit: cover;
+    z-index: 14;
+    pointer-events: none;
+    opacity: 0.85;
+  }
+
+  /* Ambient Glowing Background Elements */
+  .glow-blob {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 1;
+    filter: blur(65px);
+    opacity: 0.65;
+    animation: pulseGlow 10s ease-in-out infinite alternate;
+  }
+
+  .glow-topleft {
+    top: -120px;
+    left: -120px;
+    width: 550px;
+    height: 550px;
+    background: radial-gradient(circle, #ffd0ec 0%, #c9d2f8 70%);
+  }
+
+  .glow-bottomright {
+    bottom: -140px;
+    right: -100px;
+    width: 650px;
+    height: 650px;
+    background: radial-gradient(circle, #ffbfe4 0%, #aab6f6 70%);
+  }
+
+  .glow-center {
+    top: 25%;
+    right: 20%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(223, 228, 251, 0.9) 0%, rgba(255, 255, 255, 0) 70%);
+  }
+
+  @keyframes pulseGlow {
+    0% { transform: scale(1) translate(0, 0); }
+    100% { transform: scale(1.08) translate(20px, -20px); }
+  }
+
+  /* Floating Micro Sparkles */
+  .sparkle-particle {
+    position: absolute;
+    pointer-events: none;
+    z-index: 4;
+    font-size: 18px;
+    opacity: 0.7;
+    animation: floatSparkle 4s ease-in-out infinite alternate;
+  }
+
+  @keyframes floatSparkle {
+    0% { transform: translateY(0) scale(0.8) rotate(0deg); opacity: 0.4; }
+    100% { transform: translateY(-20px) scale(1.2) rotate(20deg); opacity: 0.9; }
+  }
+
+  /* Top Navigation Bar */
+  .navbar {
+    position: relative;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 34px 6vw 10px 6vw;
+    width: 100%;
+  }
+
+  .nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 800;
+    font-size: 20px;
+    color: var(--primary-blue);
+    letter-spacing: -0.3px;
+  }
+
+  .nav-badge {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    color: var(--primary-blue);
+    padding: 8px 22px;
+    border-radius: 30px;
+    font-size: 14px;
+    font-weight: 700;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 4px 15px rgba(91, 109, 241, 0.08);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .nav-controls {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .icon-btn {
+    height: 46px;
+    padding: 0 20px;
+    border-radius: 30px;
+    border: 1px solid var(--glass-border);
+    background: var(--glass-bg);
+    color: var(--primary-blue);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    backdrop-filter: blur(12px);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  }
+
+  .icon-btn:hover {
+    background: var(--primary-blue);
+    color: #ffffff;
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 8px 24px rgba(91, 109, 241, 0.35);
+  }
+
+  .equalizer-icon {
+    display: flex;
+    align-items: flex-end;
+    gap: 3px;
+    height: 16px;
+  }
+
+  .eq-bar {
+    width: 3px;
+    background: currentColor;
+    border-radius: 2px;
+    height: 6px;
+  }
+
+  .icon-btn.playing .eq-bar:nth-child(1) { animation: eqAnim 0.8s ease-in-out infinite alternate; }
+  .icon-btn.playing .eq-bar:nth-child(2) { animation: eqAnim 0.6s ease-in-out 0.2s infinite alternate; }
+  .icon-btn.playing .eq-bar:nth-child(3) { animation: eqAnim 0.9s ease-in-out 0.4s infinite alternate; }
+
+  @keyframes eqAnim {
+    0% { height: 4px; }
+    100% { height: 16px; }
+  }
+
+  /* Main Widescreen Layout */
+  .widescreen-hero {
+    position: relative;
+    z-index: 10;
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 0 6vw 0 6vw;
+    width: 100%;
+    height: calc(100vh - 85px);
+  }
+
+  /* Left Side: Content & Typography */
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 640px;
+    padding-bottom: 4vh;
+  }
+
+  .tag-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(91, 109, 241, 0.1);
+    color: var(--primary-blue);
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 6px 16px;
+    border-radius: 20px;
+    width: fit-content;
+    margin-bottom: 18px;
+  }
+
+  .title-main {
+    font-size: clamp(48px, 4.8vw, 76px);
+    font-weight: 900;
+    line-height: 1.1;
+    color: var(--primary-blue);
+    letter-spacing: -1px;
+    padding-bottom: 6px;
+  }
+
+  .title-name {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(84px, 8.5vw, 136px);
+    font-weight: 700;
+    background: linear-gradient(135deg, #ff5fb1 0%, #ff8fd1 50%, #e04596 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    line-height: 1.25;
+    padding: 10px 25px 10px 12px;
+    margin: -10px 0 -8px -12px;
+    display: inline-block;
+    filter: drop-shadow(0 6px 16px rgba(255, 95, 177, 0.25));
+  }
+
+  .date-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    color: var(--primary-blue);
+    font-weight: 800;
+    font-size: 19px;
+    padding: 10px 24px;
+    border-radius: 30px;
+    box-shadow: 0 6px 20px rgba(91, 109, 241, 0.1);
+    width: fit-content;
+    margin-top: 0px;
+    margin-bottom: 22px;
+    backdrop-filter: blur(10px);
+  }
+
+  .description {
+    color: var(--text-muted);
+    font-size: clamp(15px, 1.2vw, 17px);
+    line-height: 1.7;
+    margin-bottom: 32px;
+    font-weight: 400;
+    max-width: 520px;
+  }
+
+  .cta-group {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-blue-dark) 100%);
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 16px;
+    padding: 18px 36px;
+    border-radius: 36px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 14px 32px rgba(91, 109, 241, 0.38);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    text-decoration: none;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 18px 40px rgba(91, 109, 241, 0.48);
+  }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: var(--glass-bg);
+    color: var(--primary-blue);
+    font-weight: 700;
+    font-size: 16px;
+    padding: 18px 28px;
+    border-radius: 36px;
+    border: 1px solid var(--glass-border);
+    cursor: pointer;
+    backdrop-filter: blur(12px);
+    transition: all 0.25s ease;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04);
+  }
+
+  .btn-secondary:hover {
+    background: rgba(91, 109, 241, 0.12);
+    transform: translateY(-2px);
+    border-color: rgba(91, 109, 241, 0.3);
+  }
+
+  /* Right Side: Subject & Interactive Birthday Cake Asset */
+  .hero-right {
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+  }
+
+  /* Soft Light Halo Behind Head */
+  .halo-light {
+    position: absolute;
+    width: 580px;
+    height: 580px;
+    top: 35%;
+    right: -2%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.98) 0%, rgba(223, 230, 255, 0.8) 50%, rgba(255, 255, 255, 0) 80%);
+    border-radius: 50%;
+    z-index: 2;
+    filter: blur(35px);
+    pointer-events: none;
+  }
+
+  /* Interactive Cake Badge Asset */
+  .cake-badge {
+    position: absolute;
+    bottom: 8%;
+    left: -30px;
+    z-index: 25;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    padding: 14px 22px;
+    border-radius: 28px;
+    backdrop-filter: blur(16px);
+    box-shadow: 0 16px 40px rgba(91, 109, 241, 0.18);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    animation: floatCake 6s ease-in-out infinite alternate;
+  }
+
+  .cake-badge:hover {
+    transform: translateY(-6px) scale(1.05);
+    box-shadow: 0 20px 48px rgba(91, 109, 241, 0.32);
+    background: #ffffff;
+  }
+
+  @keyframes floatCake {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-10px); }
+  }
+
+  .cake-img {
+    width: 56px;
+    height: 56px;
+    object-fit: contain;
+    filter: drop-shadow(0 6px 12px rgba(255, 95, 177, 0.3));
+  }
+
+  .cake-info h4 {
+    font-size: 15px;
+    font-weight: 800;
+    color: var(--primary-blue);
+  }
+
+  .cake-info p {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+
+  /* 3D Decorative Floating Orbs */
+  .orb {
+    position: absolute;
+    border-radius: 50%;
+    z-index: 3;
+    pointer-events: none;
+    box-shadow: inset -6px -6px 14px rgba(0, 0, 0, 0.08), inset 6px 6px 14px rgba(255, 255, 255, 0.9), 0 12px 28px rgba(91, 109, 241, 0.22);
+  }
+
+  .orb-lg {
+    width: 150px;
+    height: 150px;
+    top: 5%;
+    right: 2%;
+    background: radial-gradient(circle at 35% 30%, #ebd7f9, #a9b6f6);
+    animation: floatOrb 7s ease-in-out infinite alternate;
+  }
+
+  .orb-pink {
+    width: 75px;
+    height: 75px;
+    top: 40%;
+    left: 18%;
+    background: radial-gradient(circle at 35% 30%, #ffd6ef, #ff94cc);
+    animation: floatOrb 8s ease-in-out 1s infinite alternate-reverse;
+  }
+
+  .orb-sm {
+    width: 38px;
+    height: 38px;
+    bottom: 22%;
+    left: 28%;
+    background: radial-gradient(circle at 35% 30%, #ffd6ef, #ff94cc);
+    animation: floatOrb 5s ease-in-out 0.5s infinite alternate;
+  }
+
+  .orb-blue {
+    width: 85px;
+    height: 85px;
+    bottom: 4%;
+    right: 15%;
+    background: radial-gradient(circle at 35% 30%, #dce2fc, #9caaf8);
+    animation: floatOrb 9s ease-in-out 1.5s infinite alternate-reverse;
+  }
+
+  @keyframes floatOrb {
+    0% { transform: translateY(0) rotate(0deg); }
+    100% { transform: translateY(-18px) rotate(8deg); }
+  }
+
+  /* Subject Box Cutout */
+  .subject-box {
+    position: relative;
+    z-index: 10;
+    height: 100%;
+    max-height: 94vh;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    width: 100%;
+  }
+
+  .subject-portrait {
+    height: auto;
+    max-height: 92vh;
+    width: auto;
+    max-width: 100%;
+    object-fit: contain;
+    object-position: right bottom;
+    /* Soft directional shadow on left side ONLY */
+    filter: drop-shadow(-16px 10px 30px rgba(91, 109, 241, 0.15));
+    transition: transform 0.4s ease;
+  }
+
+  .subject-box:hover .subject-portrait {
+    transform: scale(1.02);
+  }
+
+  /* Wish Modal Box */
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(32, 39, 77, 0.45);
+    backdrop-filter: blur(10px);
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    padding: 20px;
+  }
+
+  .modal-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .modal-card {
+    background: #ffffff;
+    border-radius: 32px;
+    padding: 40px;
+    width: 100%;
+    max-width: 480px;
+    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.25);
+    transform: translateY(20px) scale(0.95);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    text-align: center;
+    position: relative;
+  }
+
+  .modal-overlay.active .modal-card {
+    transform: translateY(0) scale(1);
+  }
+
+  .close-btn {
+    position: absolute;
+    top: 22px;
+    right: 22px;
+    background: #f4f6fd;
+    border: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    font-size: 20px;
+    color: var(--text-muted);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+  }
+
+  .close-btn:hover {
+    background: #e4e9fc;
+    color: var(--text-dark);
+  }
+
+  .wish-input {
+    width: 100%;
+    padding: 16px 20px;
+    border-radius: 20px;
+    border: 2px solid #eef2fb;
+    outline: none;
+    font-family: inherit;
+    font-size: 16px;
+    margin: 24px 0;
+    transition: border-color 0.2s;
+  }
+
+  .wish-input:focus {
+    border-color: var(--primary-blue);
+  }
+
+  /* Custom Stylish Alert Card Modal */
+  .alert-card {
+    background: #ffffff;
+    border-radius: 32px;
+    padding: 36px 32px;
+    width: 100%;
+    max-width: 440px;
+    box-shadow: 0 30px 70px rgba(91, 109, 241, 0.25);
+    text-align: center;
+    position: relative;
+    transform: translateY(20px) scale(0.92);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
+  .modal-overlay.active .alert-card {
+    transform: translateY(0) scale(1);
+  }
+
+  .alert-icon-box {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #eef2fb 0%, #ffffff 100%);
+    border: 2px solid rgba(91, 109, 241, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px auto;
+    font-size: 38px;
+    box-shadow: 0 12px 30px rgba(91, 109, 241, 0.15);
+  }
+
+  .alert-title {
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--primary-blue);
+    margin-bottom: 10px;
+  }
+
+  .alert-msg {
+    color: var(--text-muted);
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 26px;
+  }
+
+  /* Full Mobile Optimization for Mobile / Phone Users */
+  @media (max-width: 768px) {
+    html, body, .site-wrapper {
+      height: auto;
+      min-height: 100vh;
+      overflow-y: auto;
+      overflow-x: hidden;
+      background: linear-gradient(180deg, #f6f8fe 0%, #edf1fd 50%, #fef3f9 100%);
+    }
+
+    .balloon-border-overlay {
+      max-height: 48px;
+    }
+
+    .garland-banner {
+      width: 180px;
+      top: 4px;
+    }
+
+    .navbar {
+      padding: 52px 18px 10px 18px;
+      gap: 10px;
+    }
+
+    .nav-brand {
+      font-size: 17px;
+    }
+
+    .nav-badge {
+      font-size: 13px;
+      padding: 6px 14px;
+    }
+
+    .icon-btn {
+      height: 40px;
+      padding: 0 14px;
+      font-size: 13px;
+    }
+
+    .widescreen-hero {
+      grid-template-columns: 1fr;
+      padding: 10px 18px 50px 18px;
+      height: auto;
+      gap: 15px;
+    }
+
+    .hero-right {
+      order: -1;
+      height: auto;
+      align-items: center;
+      justify-content: center;
+      padding-right: 0;
+      margin-top: 10px;
+      flex-direction: column;
+    }
+
+    .halo-light {
+      width: 260px;
+      height: 260px;
+      top: 40%;
+      left: 50%;
+      right: auto;
+      transform: translate(-50%, -50%);
+    }
+
+    .subject-box {
+      max-height: 320px;
+      justify-content: center;
+    }
+
+    .subject-portrait {
+      max-height: 300px;
+      object-position: center bottom;
+      filter: drop-shadow(0 10px 20px rgba(91, 109, 241, 0.15));
+    }
+
+    .cake-badge {
+      position: relative;
+      bottom: auto;
+      left: auto;
+      transform: none;
+      margin: 16px auto 0 auto;
+      padding: 10px 20px;
+      width: calc(100% - 32px);
+      max-width: 280px;
+      border-radius: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      box-shadow: 0 10px 25px rgba(91, 109, 241, 0.12);
+      animation: floatCake 6s ease-in-out infinite alternate;
+    }
+
+    .cake-img {
+      width: 44px;
+      height: 44px;
+    }
+
+    @keyframes floatCake {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-5px); }
+    }
+
+    .orb-lg { width: 85px; height: 85px; top: 0; right: 5%; }
+    .orb-pink { width: 48px; height: 48px; left: 2%; }
+    .orb-blue { width: 60px; height: 60px; right: 2%; }
+
+    .hero-left {
+      align-items: center;
+      text-align: center;
+      max-width: 100%;
+      padding-bottom: 0;
+      margin-top: 10px;
+    }
+
+    .tag-pill {
+      font-size: 11px;
+      padding: 5px 14px;
+      margin-bottom: 12px;
+    }
+
+    .title-main {
+      font-size: clamp(34px, 8.5vw, 44px);
+      line-height: 1.05;
+      padding-bottom: 2px;
+    }
+
+    .title-name {
+      font-size: clamp(68px, 16vw, 88px);
+      padding: 5px 15px 15px 10px;
+      margin: -5px 0 10px -10px;
+      line-height: 1.2;
+    }
+
+    .date-badge {
+      font-size: 16px;
+      padding: 8px 20px;
+      margin-top: 0;
+      margin-bottom: 20px;
+    }
+
+    .description {
+      font-size: 14px;
+      line-height: 1.65;
+      max-width: 100%;
+      margin-bottom: 26px;
+    }
+
+    .cta-group {
+      flex-direction: column;
+      width: 100%;
+      gap: 12px;
+    }
+
+    .btn-primary, .btn-secondary {
+      width: 100%;
+      max-width: 100%;
+      height: 52px;
+      font-size: 15px;
+      border-radius: 28px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .navbar { padding: 50px 14px 10px 14px; }
+    .hero-right { height: 340px; }
+    .subject-portrait { max-height: 290px; }
+    .title-main { font-size: 34px; }
+    .title-name { font-size: 64px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Hidden Audio Track -->
+<audio id="bgAudio" src="music.mp3" loop preload="auto"></audio>
+
+<div class="site-wrapper">
+  <!-- Festive Banner Assets -->
+  <img src="banner.png" alt="Garland Banner" class="garland-banner">
+  <img src="Balloon-Border.png" alt="Balloon Border" class="balloon-border-overlay">
+
+  <!-- Ambient Glowing Background Lights -->
+  <div class="glow-blob glow-topleft"></div>
+  <div class="glow-blob glow-bottomright"></div>
+  <div class="glow-blob glow-center"></div>
+
+  <!-- Micro Sparkles -->
+  <div class="sparkle-particle" style="top: 22%; left: 12%;">✨</div>
+  <div class="sparkle-particle" style="top: 38%; left: 45%;">💖</div>
+  <div class="sparkle-particle" style="top: 65%; left: 18%;">⭐</div>
+  <div class="sparkle-particle" style="top: 18%; right: 28%;">🎈</div>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="nav-brand">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
+      </svg>
+      Birthday Wish
+    </div>
+    <div class="nav-controls">
+      <div class="nav-badge">
+        <span>29 July</span> 🎈
+      </div>
+      <button class="icon-btn" id="musicBtn" title="Play/Pause Birthday Song">
+        <div class="equalizer-icon">
+          <div class="eq-bar"></div>
+          <div class="eq-bar"></div>
+          <div class="eq-bar"></div>
+        </div>
+        <span id="musicBtnText">Play Music 🎵</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Widescreen 16:9 Main Section -->
+  <main class="widescreen-hero">
+    <!-- Left Column: Content -->
+    <section class="hero-left">
+      <div class="tag-pill">✨ Special Celebration</div>
+      <h1 class="title-main">HAPPY<br>BIRTHDAY</h1>
+      <div class="title-name">Jiya</div>
+      
+      <div class="date-badge">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect width="18" height="18" x="3" y="4" rx="2" ry="2"/>
+          <line x1="16" x2="16" y1="2" y2="6"/>
+          <line x1="8" x2="8" y1="2" y2="6"/>
+          <line x1="3" x2="21" y1="10" y2="10"/>
+        </svg>
+        29 July 2003
+      </div>
+
+      <p class="description">
+        Wishing you a year filled with purpose, joy, endless growth, and everything that brings a genuine smile to your face. May this new chapter bring you closer to every dream you're chasing!
+      </p>
+
+      <div class="cta-group">
+        <button class="btn-primary" id="confettiBtn">
+          <span>Celebrate Jiya</span>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5.8 11.3 2 22l10.7-3.79"/>
+            <path d="M4 3h.01"/>
+            <path d="M22 8h.01"/>
+            <path d="M15 2h.01"/>
+            <path d="M22 20h.01"/>
+            <path d="m22 2-2.24 7.17M11 13l3 3"/>
+          </svg>
+        </button>
+
+        <button class="btn-secondary" id="openWishModal">
+          <span>Send a Wish</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m22 2-7 20-4-9-9-4Z"/>
+            <path d="M22 2 11 13"/>
+          </svg>
+        </button>
+      </div>
+    </section>
+
+    <!-- Right Column: Subject & Interactive Cake Asset -->
+    <section class="hero-right">
+      <div class="halo-light"></div>
+
+      <!-- Interactive Birthday Cake Badge -->
+      <div class="cake-badge" id="cakeClickBadge">
+        <img src="cake.svg" alt="Birthday Cake" class="cake-img">
+        <div class="cake-info">
+          <h4>Make a Wish 🕯️</h4>
+          <p>Click to blow candles!</p>
+        </div>
+      </div>
+
+      <!-- 3D Orbs -->
+      <div class="orb orb-lg"></div>
+      <div class="orb orb-pink"></div>
+      <div class="orb orb-sm"></div>
+      <div class="orb orb-blue"></div>
+
+      <div class="subject-box">
+        <picture>
+          <source srcset="assets/jiya_nobg.webp" type="image/webp">
+          <img src="assets/jiya_nobg.png" alt="Jiya" class="subject-portrait">
+        </picture>
+      </div>
+    </section>
+  </main>
+</div>
+
+<!-- Send Wish Modal -->
+<div class="modal-overlay" id="wishModal">
+  <div class="modal-card">
+    <button class="close-btn" id="closeWishModal">&times;</button>
+    <h3 style="font-size: 26px; color: var(--primary-blue); margin-bottom: 8px;">Leave a Wish 💖</h3>
+    <p style="color: var(--text-muted); font-size: 15px;">Send a special birthday message for Jiya!</p>
+    <input type="text" class="wish-input" id="modalInput" placeholder="Type your heartfelt wish here...">
+    <button class="btn-primary" id="submitWishBtn" style="width: 100%;">Send Wish 🎉</button>
+  </div>
+</div>
+
+<!-- Custom Stylish Alert Card Modal (Replaces browser "This page says..." popups) -->
+<div class="modal-overlay" id="customAlertOverlay">
+  <div class="alert-card">
+    <div class="alert-icon-box" id="alertCardIcon">🎂</div>
+    <h3 class="alert-title" id="alertCardTitle">Make a Wish!</h3>
+    <p class="alert-msg" id="alertCardMsg">Wish blown! May all Jiya's wishes come true! ✨</p>
+    <button class="btn-primary" id="closeAlertBtn" style="width: 100%;">Awesome! 🎉</button>
+  </div>
+</div>
+
+<script>
+  // Target WhatsApp phone number
+  const TARGET_WHATSAPP = "918676992907";
+
+  // Confetti Blast Effect
+  function triggerConfetti() {
+    if (typeof confetti === 'function') {
+      confetti({
+        particleCount: 140,
+        spread: 90,
+        origin: { y: 0.6 },
+        colors: ['#5b6df1', '#ff5fb1', '#a8b2f8', '#ffb8e1', '#ffffff']
+      });
+    }
+  }
+
+  // Custom Card Alert Modal System (replaces default browser alert)
+  const customAlertOverlay = document.getElementById('customAlertOverlay');
+  const alertCardIcon = document.getElementById('alertCardIcon');
+  const alertCardTitle = document.getElementById('alertCardTitle');
+  const alertCardMsg = document.getElementById('alertCardMsg');
+  const closeAlertBtn = document.getElementById('closeAlertBtn');
+
+  function showCustomCardAlert(title, message, icon = '🎂') {
+    alertCardIcon.textContent = icon;
+    alertCardTitle.textContent = title;
+    alertCardMsg.textContent = message;
+    customAlertOverlay.classList.add('active');
+    triggerConfetti();
+  }
+
+  closeAlertBtn.addEventListener('click', () => {
+    customAlertOverlay.classList.remove('active');
+  });
+
+  // Trigger confetti on page load
+  window.addEventListener('load', () => {
+    setTimeout(triggerConfetti, 350);
+  });
+
+  document.getElementById('confettiBtn').addEventListener('click', triggerConfetti);
+  
+  // Cake Click Handler - Opens stylish card popup instead of browser alert
+  document.getElementById('cakeClickBadge').addEventListener('click', () => {
+    toggleAudio(true);
+    showCustomCardAlert('Wish Blown! 🎂', 'May all of Jiya\'s secret wishes and dreams come true! ✨', '🕯️');
+  });
+
+  // Wish Modal Handlers with direct WhatsApp integration
+  const modal = document.getElementById('wishModal');
+  const modalInput = document.getElementById('modalInput');
+
+  document.getElementById('openWishModal').addEventListener('click', () => {
+    modal.classList.add('active');
+    setTimeout(() => modalInput.focus(), 150);
+  });
+
+  document.getElementById('closeWishModal').addEventListener('click', () => {
+    modal.classList.remove('active');
+  });
+
+  function sendWishToWhatsApp() {
+    const wishText = modalInput.value.trim();
+    if (!wishText) {
+      showCustomCardAlert('Type a Wish! 😊', 'Please type a birthday wish before sending!', '✍️');
+      return;
+    }
+
+    triggerConfetti();
+    const formattedMsg = `Happy Birthday Jiya! 🎂\n\n${wishText}`;
+    const whatsappUrl = `https://wa.me/${TARGET_WHATSAPP}?text=${encodeURIComponent(formattedMsg)}`;
+    
+    // Open WhatsApp directly
+    window.open(whatsappUrl, '_blank');
+    
+    modalInput.value = '';
+    modal.classList.remove('active');
+  }
+
+  document.getElementById('submitWishBtn').addEventListener('click', sendWishToWhatsApp);
+  
+  // Also send on Enter key
+  modalInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      sendWishToWhatsApp();
+    }
+  });
+
+  // Music Player Toggle for music.mp3 with fallback synthesizer
+  const bgAudio = document.getElementById('bgAudio');
+  const musicBtn = document.getElementById('musicBtn');
+  const musicBtnText = document.getElementById('musicBtnText');
+  let isAudioPlaying = false;
+  let synthCtx = null;
+
+  function toggleAudio(forcePlay = false) {
+    if (!isAudioPlaying || forcePlay) {
+      bgAudio.play().then(() => {
+        isAudioPlaying = true;
+        musicBtn.classList.add('playing');
+        musicBtnText.textContent = 'Pause Music ⏸️';
+      }).catch(err => {
+        // Fallback to web audio synth melody if browser blocks audio autoplay
+        playSynthMelody();
+      });
+    } else {
+      bgAudio.pause();
+      isAudioPlaying = false;
+      musicBtn.classList.remove('playing');
+      musicBtnText.textContent = 'Play Music 🎵';
+    }
+  }
+
+  musicBtn.addEventListener('click', () => {
+    triggerConfetti();
+    toggleAudio();
+  });
+
+  function playSynthMelody() {
+    if (!synthCtx) {
+      synthCtx = new (window.AudioContext || window.webkitAudioContext)();
+    }
+    const notes = [
+      { f: 264, d: 0.35 }, { f: 264, d: 0.25 }, { f: 297, d: 0.5 }, { f: 264, d: 0.5 }, { f: 352, d: 0.5 }, { f: 330, d: 0.9 },
+      { f: 264, d: 0.35 }, { f: 264, d: 0.25 }, { f: 297, d: 0.5 }, { f: 264, d: 0.5 }, { f: 396, d: 0.5 }, { f: 352, d: 0.9 }
+    ];
+    let time = synthCtx.currentTime;
+    notes.forEach(note => {
+      const osc = synthCtx.createOscillator();
+      const gain = synthCtx.createGain();
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(note.f, time);
+      gain.gain.setValueAtTime(0.15, time);
+      gain.gain.exponentialRampToValueAtTime(0.001, time + note.d);
+      osc.connect(gain);
+      gain.connect(synthCtx.destination);
+      osc.start(time);
+      osc.stop(time + note.d);
+      time += note.d + 0.08;
+    });
+  }
+</script>
+</body>
+</html>
